@@ -1,5 +1,15 @@
+import BarraLateral from './containers/BarraLateral'
+import EstiloGlobal, { Container } from './styles'
+
 function App() {
-  return <div></div>
+  return (
+    <>
+      <EstiloGlobal />
+      <Container>
+        <BarraLateral />
+      </Container>
+    </>
+  )
 }
 
 export default App
