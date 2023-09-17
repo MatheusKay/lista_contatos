@@ -5,6 +5,7 @@ const EstiloGlobal = createGlobalStyle`
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    list-style: none;
   }
 `
 
@@ -14,3 +15,6 @@ export const Container = styled.div`
 `
 
 export default EstiloGlobal
+
+// vermelho: #C23616;
+// verde: #44bd32
