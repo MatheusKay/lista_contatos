@@ -1,10 +1,10 @@
 import styled from 'styled-components'
 
-import { Props } from '.'
+type Props = {
+  ativo: boolean
+}
 
-type PropsEstilo = Omit<Props, 'contador' | 'legenda'>
-
-export const Card = styled.div<PropsEstilo>`
+export const Card = styled.div<Props>`
   padding: 8px;
   margin-top: 16px;
   display: flex;

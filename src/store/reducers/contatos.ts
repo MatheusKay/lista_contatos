@@ -2,19 +2,56 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 
 import Contato from '../../models/Contato'
 
+import * as enums from '../../utils/enums/Contato'
+
+type ContatosState = {
+  itens: Contato[]
+}
+
+const initialState: ContatosState = {
+  itens: [
+    {
+      titulo: 'Kayque',
+      email: 'exemplo@gamil.com',
+      contato: 40028922,
+      criterio: enums.default.LETRA_K,
+      id: 1
+    },
+    {
+      titulo: 'Atheus',
+      email: 'exemplo@gamil.com',
+      contato: 40028922,
+      criterio: enums.default.LETRA_A,
+      id: 2
+    },
+    {
+      titulo: 'Irineu',
+      email: 'exemplo@gamil.com',
+      contato: 40028922,
+      criterio: enums.default.LETRA_I,
+      id: 3
+    }
+  ]
+}
+
 const contatosSlice = createSlice({
   name: 'contatos',
-  initialState: [
-    new Contato('Irineu', 'exemplo@gamil.com', 40028922, 1),
-    new Contato('Atheus', 'exemplo@gamil.com', 40028922, 2),
-    new Contato('Kayque', 'exemplo@gamil.com', 40028922, 3)
-  ],
+  initialState,
   reducers: {
     remover: (state, action: PayloadAction<number>) => {
-      state = state.filter((tarefa) => tarefa.id != action.payload)
+      state.itens = state.itens.filter((tarefa) => tarefa.id != action.payload)
+    },
+    editar: (state, action: PayloadAction<Contato>) => {
+      const indexDoContato = state.itens.findIndex(
+        (cont) => cont.id === action.payload.id
+      )
+
+      if (indexDoContato >= 0) {
+        state.itens[indexDoContato] = action.payload
+      }
     }
   }
 })
 
-export const { remover } = contatosSlice.actions
+export const { remover, editar } = contatosSlice.actions
 export default contatosSlice.reducer
