@@ -1,7 +1,7 @@
 import { useSelector } from 'react-redux'
 
 import Contato from '../../components/Contato'
-import { Container } from './styles'
+import { MainContainer, Titulo } from '../../styles'
 
 import { RootReducer } from '../../store'
 
@@ -31,11 +31,18 @@ const ListaDeContatos = () => {
     }
   }
 
+  const contatosFiltro = filtrarContatos()
+
   return (
-    <Container>
-      <p>2 contatos {termo}</p>
+    <MainContainer>
+      <Titulo as="p">
+        {contatosFiltro.length}{' '}
+        {contatosFiltro.length > 1 ? 'contatos marcados' : 'contato marcado'}{' '}
+        como: {criterio == 'todos' ? '"Todos"' : `"${valor}"`}{' '}
+        {termo ? `e pesquisa como: "${termo}"` : ''}
+      </Titulo>
       <ul>
-        {filtrarContatos().map((cont) => (
+        {contatosFiltro.map((cont) => (
           <li key={cont.titulo}>
             <Contato
               id={cont.id}
@@ -47,7 +54,7 @@ const ListaDeContatos = () => {
           </li>
         ))}
       </ul>
-    </Container>
+    </MainContainer>
   )
 }
 

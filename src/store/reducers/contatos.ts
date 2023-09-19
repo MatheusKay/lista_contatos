@@ -2,36 +2,12 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 
 import Contato from '../../models/Contato'
 
-import * as enums from '../../utils/enums/Contato'
-
 type ContatosState = {
   itens: Contato[]
 }
 
 const initialState: ContatosState = {
-  itens: [
-    {
-      titulo: 'Kayque',
-      email: 'exemplo@gamil.com',
-      contato: 40028922,
-      criterio: enums.default.LETRA_K,
-      id: 1
-    },
-    {
-      titulo: 'Atheus',
-      email: 'exemplo@gamil.com',
-      contato: 40028922,
-      criterio: enums.default.LETRA_A,
-      id: 2
-    },
-    {
-      titulo: 'Irineu',
-      email: 'exemplo@gamil.com',
-      contato: 40028922,
-      criterio: enums.default.LETRA_I,
-      id: 3
-    }
-  ]
+  itens: []
 }
 
 const contatosSlice = createSlice({
@@ -49,9 +25,27 @@ const contatosSlice = createSlice({
       if (indexDoContato >= 0) {
         state.itens[indexDoContato] = action.payload
       }
+    },
+    cadastrar: (state, action: PayloadAction<Omit<Contato, 'id'>>) => {
+      const contatoJaExiste = state.itens.find(
+        (cont) => cont.contato === action.payload.contato
+      )
+
+      if (contatoJaExiste) {
+        alert('Ja existe um Contato com esse numero')
+      } else {
+        const ultimoContato = state.itens[state.itens.length - 1]
+
+        const contatoNovo = {
+          ...action.payload,
+          id: ultimoContato ? ultimoContato.id + 1 : 1
+        }
+
+        state.itens.push(contatoNovo)
+      }
     }
   }
 })
 
-export const { remover, editar } = contatosSlice.actions
+export const { remover, editar, cadastrar } = contatosSlice.actions
 export default contatosSlice.reducer

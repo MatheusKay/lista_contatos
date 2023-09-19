@@ -5,6 +5,7 @@ import * as S from './styles'
 import ContatoClass from '../../models/Contato'
 
 import { remover, editar } from '../../store/reducers/contatos'
+import { Botao, BotaoSalvar } from '../../styles'
 
 type Props = ContatoClass
 
@@ -38,7 +39,10 @@ const Contato = ({
 
   return (
     <S.Card>
-      <S.Titulo>{titulo}</S.Titulo>
+      <S.Titulo>
+        {estaEditando && <em>Editando: </em>}
+        {titulo}
+      </S.Titulo>
       <S.Email>{email}</S.Email>
       <S.Label>Tel/Cel: </S.Label>
       <S.Descricao
@@ -49,7 +53,7 @@ const Contato = ({
       <S.BarraAcoes>
         {estaEditando ? (
           <>
-            <S.BotaoSalvar
+            <BotaoSalvar
               onClick={() => {
                 dispatch(
                   editar({
@@ -64,14 +68,14 @@ const Contato = ({
               }}
             >
               Salvar
-            </S.BotaoSalvar>
+            </BotaoSalvar>
             <S.BotaoRemoverCancelar onClick={cancelarEdicao}>
               Cancelar
             </S.BotaoRemoverCancelar>
           </>
         ) : (
           <>
-            <S.Botao onClick={() => setEstaEditando(true)}>Editar</S.Botao>
+            <Botao onClick={() => setEstaEditando(true)}>Editar</Botao>
             <S.BotaoRemoverCancelar onClick={() => dispatch(remover(id))}>
               Remover
             </S.BotaoRemoverCancelar>

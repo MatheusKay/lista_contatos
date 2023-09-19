@@ -1,4 +1,5 @@
 import styled from 'styled-components'
+import { Botao } from '../../styles'
 
 export const Card = styled.div`
   padding: 16px;
@@ -39,22 +40,6 @@ export const Descricao = styled.input`
 export const BarraAcoes = styled.div`
   padding-top: 16px;
   border-top: 1px solid rgba(0, 0, 0, 0.1);
-`
-
-export const Botao = styled.button`
-  padding: 8px 12px;
-  margin-right: 8px;
-  font-size: 12px;
-  font-weight: bold;
-  border: none;
-  background-color: #2f3640;
-  border-radius: 8px;
-  color: #fff;
-  cursor: pointer;
-`
-
-export const BotaoSalvar = styled(Botao)`
-  background-color: #44bd32;
 `
 
 export const BotaoRemoverCancelar = styled(Botao)`
