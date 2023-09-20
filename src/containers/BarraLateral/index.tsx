@@ -1,8 +1,11 @@
+import { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 
 import FiltroCard from '../../components/FIltroCard'
 import * as S from './styled'
+
+import MenuHam from '../../imagens/Vetor_do_Menu.png'
 
 import { RootReducer } from '../../store'
 import { alterarTermo } from '../../store/reducers/filtro'
@@ -17,20 +20,30 @@ type Props = {
 const BarraLateral = ({ mostrarFiltros }: Props) => {
   const dispatch = useDispatch()
   const navigate = useNavigate()
+  const [menuAberto, setMenuAberto] = useState(false)
+
+  const toggleMenu = () => {
+    setMenuAberto(!menuAberto)
+  }
 
   const { termo } = useSelector((state: RootReducer) => state.filtros)
 
   return (
-    <S.Aside>
+    <S.Aside menu={menuAberto} mostrarFiltros={mostrarFiltros}>
       {mostrarFiltros ? (
         <>
-          <Campo
-            type="text"
-            placeholder="Contatos"
-            value={termo}
-            onChange={(e) => dispatch(alterarTermo(e.target.value))}
-          />
-          <S.Filtros>
+          <S.MainFiltro>
+            <Campo
+              type="text"
+              placeholder="Contatos"
+              value={termo}
+              onChange={(e) => dispatch(alterarTermo(e.target.value))}
+            />
+            <S.ButtonMenu onClick={toggleMenu}>
+              <S.MenuHamb src={MenuHam} alt="Menu Hamburgue" />
+            </S.ButtonMenu>
+          </S.MainFiltro>
+          <S.Filtros className={menuAberto ? 'aberto' : ''}>
             <FiltroCard criterio="todos" legenda="todos" />
             <FiltroCard
               valor={enums.default.LETRA_A}

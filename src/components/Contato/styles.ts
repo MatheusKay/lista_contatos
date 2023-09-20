@@ -10,23 +10,22 @@ export const Card = styled.div`
 
 export const Titulo = styled.h3`
   margin-bottom: 8px;
-  font-size: 18px;
-  font-weight: bold;
 `
-export const Email = styled.span`
-  display: block;
-  margin-bottom: 8px;
-  color: #8b8b8b;
-  font-size: 14px;
-  line-height: 24px;
-`
+// export const Email = styled.input`
+//   display: block;
+//   margin-bottom: 8px;
+//   color: #8b8b8b;
+//   font-size: 14px;
+//   line-height: 24px;
+// `
+
 export const Label = styled.label`
   color: #8b8b8b;
   font-size: 16px;
   line-height: 24px;
 `
 
-export const Descricao = styled.input`
+export const Campo = styled.input`
   width: 90%;
   margin-bottom: 16px;
   color: #8b8b8b;
@@ -35,6 +34,17 @@ export const Descricao = styled.input`
   border: none;
   background-color: transparent;
   resize: none;
+`
+
+export const CompoEmail = styled(Campo)`
+  width: 100%;
+`
+
+export const CampoTitulo = styled(Campo)`
+  width: 80%;
+  font-size: 18px;
+  font-weight: bold;
+  color: #000;
 `
 
 export const BarraAcoes = styled.div`

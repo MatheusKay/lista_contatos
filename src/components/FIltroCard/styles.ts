@@ -5,6 +5,7 @@ type Props = {
 }
 
 export const Card = styled.div<Props>`
+  width: 100%;
   padding: 8px;
   margin-top: 16px;
   display: flex;
@@ -19,6 +20,7 @@ export const Card = styled.div<Props>`
 export const Ordem = styled.span`
   font-wight: bold;
   font-size: 18px;
+  text-transform: capitalize;
 `
 
 export const Contador = styled.span`

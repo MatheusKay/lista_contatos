@@ -11,20 +11,24 @@ type Props = ContatoClass
 
 const Contato = ({
   contato: contatoOriginal,
-  email,
-  titulo,
+  email: emailOriginal,
+  titulo: tituloOriginal,
   id,
   criterio
 }: Props) => {
   const dispatch = useDispatch()
   const [estaEditando, setEstaEditando] = useState(false)
+  const [titulo, setTitulo] = useState('')
+  const [email, setEmail] = useState('')
   const [contato, setContato] = useState(0)
 
   useEffect(() => {
     if (contatoOriginal > 0) {
       setContato(contatoOriginal)
+      setEmail(emailOriginal)
+      setTitulo(tituloOriginal)
     }
-  }, [contatoOriginal])
+  }, [contatoOriginal, emailOriginal, tituloOriginal])
 
   const setandoContato = (e: ChangeEvent<HTMLInputElement>) => {
     const valorNumerico = Number(e.target.value)
@@ -34,18 +38,28 @@ const Contato = ({
 
   const cancelarEdicao = () => {
     setEstaEditando(false)
+    setTitulo(tituloOriginal)
     setContato(contatoOriginal)
+    setEmail(emailOriginal)
   }
 
   return (
     <S.Card>
       <S.Titulo>
         {estaEditando && <em>Editando: </em>}
-        {titulo}
+        <S.CampoTitulo
+          value={titulo}
+          disabled={!estaEditando}
+          onChange={(e) => setTitulo(e.target.value)}
+        />
       </S.Titulo>
-      <S.Email>{email}</S.Email>
+      <S.CompoEmail
+        value={email}
+        disabled={!estaEditando}
+        onChange={(e) => setEmail(e.target.value)}
+      />
       <S.Label>Tel/Cel: </S.Label>
-      <S.Descricao
+      <S.Campo
         disabled={!estaEditando}
         value={contato}
         onChange={(e) => setContato(setandoContato(e))}
